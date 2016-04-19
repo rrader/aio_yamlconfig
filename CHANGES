@@ -1,6 +1,13 @@
 aio_yamlconfig Changelog
 ======================
 
+Version 0.1.1
+-----------------
+
+Released on April 19, 2016.
+
+  - YAML dependency changed from yaml to PyYAML.
+
 
 Version 0.1.0
 -----------------
