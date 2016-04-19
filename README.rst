@@ -31,7 +31,7 @@ Validation
 --------------------
 
 To validate your config we use the great library Trafaret. You can read more about it in the docs,
- http://trafaret.readthedocs.org/en/latest/ . Here I'll give simple example of the usage.
+http://trafaret.readthedocs.org/en/latest/ . Here I'll give simple example of the usage.
 
 Let's write the validator for `config.yaml` above. We'd like to assure that `DEBUG` value is boolean, and that
 directory by the path `TEMPLATES_DIR` really exists::
