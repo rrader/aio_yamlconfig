@@ -30,5 +30,5 @@ setup(name='aio_yamlconfig',
       url='https://github.com/rrader/aio_yamlconfig',
       license='BSD',
       packages=find_packages(),
-      install_requires=['trafaret', 'yaml'],
+      install_requires=['trafaret', 'PyYAML'],
       include_package_data = True)
