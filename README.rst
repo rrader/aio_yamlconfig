@@ -4,6 +4,14 @@ aio_yamlconfig
 Quick Start
 ------------------
 
+Install::
+
+    pip install aio_yamlconfig
+
+OR via setup.py::
+
+    python setup.py install
+
 YAML configuration parser with validation using Trafaret ( http://trafaret.readthedocs.org/en/latest/ ).
 
 In the easiest setup without config validation, configure you aiohttp application with::
