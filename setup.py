@@ -1,3 +1,5 @@
+__version__='0.2.0'
+
 import os
 
 from setuptools import setup, find_packages
@@ -7,9 +9,8 @@ classifiers = [
     'License :: OSI Approved :: BSD License',
     'Intended Audience :: Developers',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.3',
-    'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
+    'Programming Language :: Python :: 3.6',
     'Environment :: Web Environment',
     'Development Status :: 4 - Beta',
 ]
@@ -20,7 +21,7 @@ def read(fname):
 
 
 setup(name='aio_yamlconfig',
-      version='0.1.0',
+      version=__version__,
       description='YAML configuration parser with validation.',
       long_description=read('README.rst'),
       classifiers=classifiers,
@@ -31,4 +32,4 @@ setup(name='aio_yamlconfig',
       license='BSD',
       packages=find_packages(),
       install_requires=['trafaret', 'PyYAML'],
-      include_package_data = True)
+      include_package_data=True)
