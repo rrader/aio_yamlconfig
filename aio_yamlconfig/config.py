@@ -33,6 +33,9 @@ class BaseYAMLConfig(collections.Mapping):
         else:
             self._validated = self._raw
 
+    def register_tag(self, tag, callback):
+        return yaml.add_constructor(tag, callback, Loader=self._YAMLLoader)
+
     def __len__(self):
         return len(self._validated)
 
@@ -59,5 +62,10 @@ class AppYAMLConfig(BaseYAMLConfig):
         assert self._base_dir is not None, "configuration contains !BaseDir options, but base_dir is not defined"
         return os.path.join(self._base_dir, loader.construct_scalar(node))
 
+    def _tag_env_var(self, loader, node):
+        env_var_name = loader.construct_scalar(node)
+        return os.getenv(env_var_name)
+
     def _setup_loader(self):
-        yaml.add_constructor("!BaseDir", self._tag_base_dir, Loader=self._YAMLLoader)
+        self.register_tag('!BaseDir', self._tag_base_dir)
+        self.register_tag('!EnvVar', self._tag_env_var)
