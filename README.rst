@@ -15,45 +15,61 @@ aio_yamlconfig
 Quick Start
 ------------------
 
-Install::
+Install from PYPI:
+
+.. code:: shell
 
     pip install aio_yamlconfig
 
-OR via setup.py::
+OR (less popular) via setup.py:
 
-    python setup.py install
+.. code:: shell
 
-YAML configuration parser with validation using Trafaret ( http://trafaret.readthedocs.org/en/latest/ ).
+    python -m setup install
 
-In the easiest setup without config validation, configure you aiohttp application with::
+YAML configuration parser with validation using `Trafaret <http://trafaret.readthedocs.org/en/latest/>`_.
+
+In the easiest setup without config validation, configure your ``aiohttp`` application with:
+
+.. code:: python
+   :number-lines:
 
     CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
     loop.run_until_complete(aio_yamlconfig.setup(app,
                                                  config_files=[CONFIG_FILE],
                                                  base_dir=os.path.dirname(__file__)))
 
-Assume you have ``config.yaml``::
+Assume you have ``config.yaml``:
+
+.. code:: yaml
+   :number-lines:
 
     DEBUG: True
     TEMPLATES_DIR: !BaseDir path/to/templates
 
-Then you can access your config as::
+Then you can access your config as:
+
+.. code:: python
+   :number-lines:
 
     if app.config['DEBUG']:
         print('some debug information')
 
-Notice the ``!BaseDir`` tag. aio_yamlconfig can do some config transformations for you, in this case it will prepend
-the base directory (passed as ``base_dir`` in setup) to your path. The variable app.config['TEMPLATES_DIR'] will contain
+Notice the ``!BaseDir`` tag. ``aio_yamlconfig`` can do some config transformations for you, in this case it will prepend
+the base directory (passed as ``base_dir`` to ``setup()``) to your path. The variable ``app.config['TEMPLATES_DIR']`` will contain
 the full path to directory with your templates.
 
 Validation
 --------------------
 
-To validate your config we use the great library Trafaret. You can read more about it in the docs,
-http://trafaret.readthedocs.org/en/latest/ . Here I'll give simple example of the usage.
+To validate your config we use the great library Trafaret. You can read more about it `in the docs <http://trafaret.readthedocs.org/en/latest/>`_.
+Here I'll give you a simple example of its usage.
 
-Let's write the validator for ``config.yaml`` above. We'd like to assure that ``DEBUG`` value is boolean, and that
-directory by the path ``TEMPLATES_DIR`` really exists::
+Let's write the validator for ``config.yaml`` above. We'd like to ensure that ``DEBUG`` value is boolean, and that
+directory of the path ``TEMPLATES_DIR`` really exists:
+
+.. code:: python
+   :number-lines:
 
     import trafaret as t
     from aio_yamlconfig.trafarets import ExistingDirectory
@@ -64,7 +80,10 @@ directory by the path ``TEMPLATES_DIR`` really exists::
     })
 
 
-To enable validation pass the ``trafaret_validator`` to the setup function::
+To enable such validation pass the ``trafaret_validator`` to ``setup()`` function:
+
+.. code:: python
+   :number-lines:
 
     loop.run_until_complete(aio_yamlconfig.setup(app,
                                                  config_files=[CONFIG_FILE],
