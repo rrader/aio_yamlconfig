@@ -1,6 +1,14 @@
 aio_yamlconfig Changelog
 ======================
 
+Version 0.2
+-----------------
+
+Released on January 2, 2017.
+
+  - Add support for env vars via ``!EnvVar`` tag (PR #1 by @webknjaz)
+
+
 Version 0.1.1
 -----------------
 
