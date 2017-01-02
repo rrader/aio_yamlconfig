@@ -1,0 +1,26 @@
+language: python
+python:
+- 3.5
+- 3.6
+- nightly
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - python: nightly
+
+cache: pip
+
+install: pip install -e .
+script: echo No tests set up
+
+deploy:
+  provider: pypi
+  on:
+    tags: true
+    python: 3.6
+  user: rrader
+  password:
+    secure: <add secured password here>
+  distributions: release
+  skip_upload_docs: true
