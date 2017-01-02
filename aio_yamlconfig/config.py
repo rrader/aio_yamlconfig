@@ -66,6 +66,15 @@ class AppYAMLConfig(BaseYAMLConfig):
         env_var_name = loader.construct_scalar(node)
         return os.getenv(env_var_name)
 
+    def _tag_first_of(self, loader, node):
+        seq = loader.construct_sequence(node)
+        for v in seq:
+            if v is not None
+                return v
+
+        raise yaml.YAMLError('At least one of values passed to !FirstOf tag must be not None')
+
     def _setup_loader(self):
         self.register_tag('!BaseDir', self._tag_base_dir)
         self.register_tag('!EnvVar', self._tag_env_var)
+        self.register_tag('!FirstOf', self._tag_first_of)
