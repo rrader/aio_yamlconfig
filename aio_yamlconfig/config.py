@@ -49,7 +49,7 @@ class BaseYAMLConfig(collections.Mapping):
         if self._validated:
             return str(self._validated)
         else:
-            return "<empty config>"
+            return '<empty config>'
 
 
 class AppYAMLConfig(BaseYAMLConfig):
@@ -59,7 +59,7 @@ class AppYAMLConfig(BaseYAMLConfig):
         self._setup_loader()
 
     def _tag_base_dir(self, loader, node):
-        assert self._base_dir is not None, "configuration contains !BaseDir options, but base_dir is not defined"
+        assert self._base_dir is not None, 'configuration contains !BaseDir options, but base_dir is not defined'
         return os.path.join(self._base_dir, loader.construct_scalar(node))
 
     def _tag_env_var(self, loader, node):
@@ -69,7 +69,7 @@ class AppYAMLConfig(BaseYAMLConfig):
     def _tag_first_of(self, loader, node):
         seq = loader.construct_sequence(node)
         for v in seq:
-            if v is not None
+            if v is not None:
                 return v
 
         raise yaml.YAMLError('At least one of values passed to !FirstOf tag must be not None')

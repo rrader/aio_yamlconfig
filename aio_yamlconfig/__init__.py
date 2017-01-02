@@ -1,4 +1,4 @@
-from aio_yamlconfig.config import AppYAMLLoader, BaseYAMLConfig, AppYAMLConfig
+from aio_yamlconfig.config import AppYAMLConfig
 
 
 async def setup_empty(app, **kwargs):
