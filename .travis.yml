@@ -1,0 +1,42 @@
+language: python
+python:
+- 3.5
+- 3.6
+- nightly
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - python: nightly
+  include:
+    - python: 3.6
+      env: RUN_LINTERS=true
+
+cache: pip
+
+before_install: |
+  if [[ -n "$RUN_LINTERS" ]]
+  then
+    pip install pre-commit
+  fi
+install: pip install -e .
+
+script: |
+  if [[ -n "$RUN_LINTERS" ]]
+  then
+    pre-commit run --all-files
+  else
+    echo No tests set up
+  fi
+
+deploy:
+  provider: pypi
+  on:
+    tags: true
+    python: 3.6
+    condition: $RUN_LINTERS = true
+  user: rrader
+  password:
+    secure: <add secured password here>
+  distributions: release
+  skip_upload_docs: true
