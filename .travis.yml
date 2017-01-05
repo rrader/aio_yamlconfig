@@ -3,24 +3,20 @@ python:
 - 3.5
 - 3.6
 - nightly
-
 matrix:
   fast_finish: true
   allow_failures:
-    - python: nightly
+  - python: nightly
   include:
-    - python: 3.6
-      env: RUN_LINTERS=true
-
+  - python: 3.6
+    env: RUN_LINTERS=true
 cache: pip
-
 before_install: |
   if [[ -n "$RUN_LINTERS" ]]
   then
     pip install pre-commit
   fi
 install: pip install -e .
-
 script: |
   if [[ -n "$RUN_LINTERS" ]]
   then
@@ -28,15 +24,14 @@ script: |
   else
     echo No tests set up
   fi
-
 deploy:
   provider: pypi
   on:
     tags: true
     python: 3.6
-    condition: $RUN_LINTERS = true
+    condition: "$RUN_LINTERS = true"
   user: rrader
   password:
-    secure: <add secured password here>
+    secure: R42jpEuvWDRs4Sf1uLKLbWY+3NBI3GDyp4eF9MDHa127LTRA4kLPMO/WkBadw6/ybTFTijLtm8+lW3uF4HS1MFf/IENakL8tQy0kVdJiko48i6YRt1NKeSDMUJiabk3ub59Nfef6Ted0WvAmcefXZtEEUqDOzEPAf1hCG2qFrAdMrvF22XomNfxcgZ7iBJzBMhtl3d0Oe315iDeBigF80sX7c10dBIEgfVESL5koPb2W9EI58p1okDw92vWVMLrj7MWH+tguehD1TuOluiuolvEohr1anckdzJB/1uC/zcBa30jZytCi4YAnc+x3EEew3Oz1GqZCJzZXha5q+uhKvob3RTiot8oWsu6tnunaKPNGZHVacA5iedRolD9wwIwndrlHBdrPHnZ1tViU0+N9YoIcLZPqYg2uFOlQAwy1ofc+f29qL/5rqMffzXScFLPscYSZX+rIYBsM3PCOlNMD4Vd7ILUh4ESaib01fp0dIRp971dJhas+Fl9JO8KCZJhLF1gaWdjylB32054dwfnZ0ukN8CKTEcLr12A1gwq2ZItHBQzPARTAs+JGAZcH2M+hsak5J0j408WVpoVH8X1SWQAH3CPX2WYcwc5vWgtItzz4rP5+O7X7ohBBg1uF8svDsw5fuBv6TRYx4uN4Lnph4N0VqETc1YzSNG1fo6bTI94=
   distributions: release
   skip_upload_docs: true
